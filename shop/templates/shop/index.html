@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{% static 'shop/style.css' %}">    
+<title>Document</title>
+</head>
+<body>
+    <div class="container">
+
+        <!--This is for the search part and where you want to search-->
+        <div class="row">
+            <div class="col-md-12">
+                <form class="card card-sa">
+                    <div class="card-body row no-gutters align-items-center "></div>
+                        <div class="col">
+                        <input type="search" name="item_name" placeholder="Search for products" class="form-control form-control-borderless">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--This is where the items appear-->
+        <div class="row">
+            {% for product in product_objects %}
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{ product.image }}" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <div class="card-title">
+                            {{product.title}}
+                        </div>
+                        <div class="card-text">
+                            ${{ product.price}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+        <!--Pagination the next, previous and current page-->
+        <div class="row">
+            <div class="col-md-3 offset-md-4">
+                <ul class="pagination">
+                    
+                    <li class="page-item">
+                        <a href="?page={{ product_objects.previous_page_number }}">Previous</a>
+                    </li>
+                    
+
+
+                    <li class="page-item active">
+                        <a href="?page={{ product_objects.number }}">Current</a>
+                    </li>
+
+
+                   
+                    <li class="page-item">
+                        <a href="?page={{ product_objects.next_page_number }}">Next</a>
+                    </li>
+                   
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+   
